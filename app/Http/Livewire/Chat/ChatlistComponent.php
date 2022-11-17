@@ -15,7 +15,7 @@ class ChatlistComponent extends Component
     public $name;
     public $selectedConversation;
 
-    protected $listeners = ['chatUserSelected', 'refresh'=>'$refresh'];
+    protected $listeners = ['chatUserSelected', 'refresh'=>'$refresh', 'resetComponent'];
 
     public function mount()
     {
@@ -55,5 +55,11 @@ class ChatlistComponent extends Component
 
         $this->emitTo('chat.chatbox', 'loadConversation', $this->selectedConversation, $receiverInstance);
         $this->emitTo('chat.sendmessage-component', 'updateSendMessage', $this->selectedConversation, $receiverInstance);
+    }
+
+    public function resetComponent()
+    {
+        $this->selectedConversation = null;
+        $this->receiverInstance= null;
     }
 }

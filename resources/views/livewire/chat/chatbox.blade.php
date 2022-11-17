@@ -31,15 +31,23 @@
         </div>
         <div class="chatbox_body">
             @foreach ($messages as $message)
-                <div wire:key='{{ $message->id }}'
-                    class="message_body {{ auth()->id() == $message->sender_id ? 'message_body_me' : 'message_body_receiver' }}" style="width: 80%; max-width: 80%; max-width: max-content;">
+                <div class="message_body {{ auth()->id() == $message->sender_id ? 'message_body_me' : 'message_body_receiver' }}"
+                    style="width: 80%; max-width: 80%; max-width: max-content;">
                     {{ $message->body }}
                     <div class="message_body_footer">
                         <div class="date">
                             {{ $message->created_at->format('m: i: a') }}
                         </div>
                         <div class="read">
-                            <i class="bi bi-check"></i>
+                            @php
+                                if($message->user->id === auth()->id()){
+                                    if($message->read == 0){
+                                        echo'<i class="bi bi-check2 status_tick"></i>';
+                                    }else{
+                                        echo'<i class="bi bi-check2-all text-primary "></i>';
+                                    }
+                                }
+                            @endphp
                         </div>
                     </div>
                 </div>
@@ -76,5 +84,21 @@
         window.addEventListener('rowChatToBottom', event => {
             $('.chatbox_body').scrollTop($('.chatbox_body')[0].scrollHeight);
         });
+    </script>
+
+    <script>
+        $(document).on('click', '.return', function() {
+            window.livewire.emit('resetComponent');
+        });
+    </script>
+
+    <script>
+        window.addEventListener('markMessageAsRead', event=>{
+            var value = document.querySelectorAll('.status_tick');
+            value.forEach(element, index => {
+                element.classList.remove('bi bi-check2');
+                element.classList.add('bi bi-check2', 'text-primary');
+            });
+        })
     </script>
 </div>

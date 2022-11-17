@@ -15,7 +15,7 @@ class SendmessageComponent extends Component
     public $body;
     public $createMessage;
 
-    protected $listeners=['updateSendMessage', 'dispatchMessageSend'];
+    protected $listeners=['updateSendMessage', 'dispatchMessageSend', 'resetComponent'];
 
     public function render()
     {
@@ -54,5 +54,11 @@ class SendmessageComponent extends Component
     public function dispatchMessageSend()
     {
         broadcast(new MessageSendEvent(Auth()->user(), $this->createMessage, $this->selectedConversation, $this->receiverInstance));
+    }
+
+    public function resetComponent()
+    {
+        $this->selectedConversation = null;
+        $this->receiverInstance= null;
     }
 }
