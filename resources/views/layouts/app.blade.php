@@ -21,7 +21,8 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     @vite(['resources/css/app.css'])
-    @vite(['resources/css/chat.css'])
+    {{-- @vite(['resources/css/chat.css']) --}}
+    <link rel="stylesheet" href="{{asset('css/chat.css')}}">
 
     <style>
         body {
