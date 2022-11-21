@@ -60,6 +60,21 @@ class Chatbox extends Component
         $this->emitSelf('broadcastMessageRead');
     }
 
+    public function broadcastMessageRead()
+    {
+        broadcast(new MessageReadEvent($this->selectedConversation->id, $this->receiverInstance->id));
+    }
+
+    public function broadcastedMessageRead($event)
+    {
+        // dd($event);
+        if ($this->selectedConversation) {
+            if ((int)$this->selectedConversation->id === (int)$event['conversation_id']) {
+                $this->dispatchBrowserEvent('markMessageAsRead');
+            }
+        }
+    }
+
     public function pushMessage($messageId)
     {
         $newMessage = Message::find($messageId);
@@ -103,21 +118,6 @@ class Chatbox extends Component
                 $this->pushMessage($broadcastedMessage->id);
 
                 $this->emitSelf('broadcastMessageRead');
-            }
-        }
-    }
-
-    public function broadcastMessageRead()
-    {
-        broadcast(new MessageReadEvent($this->selectedConversation->id, $this->receiverInstance->id));
-    }
-
-    public function broadcastedMessageRead($event)
-    {
-        // dd($event);
-        if ($this->selectedConversation) {
-            if ((int)$this->selectedConversation->id === (int)$event['conversation_id']) {
-                $this->dispatchBrowserEvent('markMessageAsRead');
             }
         }
     }

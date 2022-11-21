@@ -20,7 +20,7 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css'])
     @vite(['resources/css/chat.css'])
 
     <style>
@@ -57,6 +57,7 @@
     @stack('modals')
 
     @livewireScripts
+    @vite(['resources/js/app.js'])
 </body>
 
 </html>

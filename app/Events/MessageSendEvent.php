@@ -53,8 +53,8 @@ class MessageSendEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        Log::info($this->user);
-        Log::info($this->receiver);
+        // Log::info($this->user);
+        // Log::info($this->receiver);
         return new PrivateChannel('chat.' . $this->receiver->id);
     }
 }

@@ -17,6 +17,16 @@
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('internships') }}" :active="request()->routeIs('internships')">
+                        {{ __('Pasantias') }}
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('jobs') }}" :active="request()->routeIs('jobs')">
+                        {{ __('Bolsa de empleo') }}
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('chat') }}" :active="request()->routeIs('chat')">
                         {{ __('Chat') }}
                     </x-jet-nav-link>

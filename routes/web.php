@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Livewire\BlogComponent;
 use App\Http\Livewire\Chat\ChatmainComponent;
 use App\Http\Livewire\Chat\CreatechatComponent;
+use App\Http\Livewire\InternshipsComponent;
+use App\Http\Livewire\JobsComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->to('/dashboard');
 });
 
 
@@ -30,4 +33,7 @@ Route::middleware([
     })->name('dashboard');
     Route::get('/users', CreatechatComponent::class)->name('users');
     Route::get('/chat{key?}', ChatmainComponent::class)->name('chat');
+    Route::get('/news', BlogComponent::class)->name('new');
+    Route::get('/internships', InternshipsComponent::class)->name('internships');
+    Route::get('/jobs', JobsComponent::class)->name('jobs');
 });
